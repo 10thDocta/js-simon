@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -13,12 +15,20 @@
 
     <div class="container">
 
-        <div id="hide" class="hide">
+        <div id="hide_random" class="hide">
             <h2>I numeri da ricordare erano</h2>
             <div id="random_numbers">
             </div>
         </div>
 
+
+        <div id="hide_message" class="hide">
+            <div id="end_game_message">
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;" id="dialog-message" title="Memory">
     </div>
 
     <script src="js/main.js"></script>
