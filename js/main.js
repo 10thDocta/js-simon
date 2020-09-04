@@ -16,6 +16,18 @@ const genRandomNumbArr = number => {
 //in questa variabile salvo il risultato della funzione genRandomNumbArr 
 const randNumbArr = genRandomNumbArr(numberToRemember);
 
+
+/*  ------------- TEST ---------------- */
+let inner = "";
+
+for (let i = 0; i < randNumbArr.length; i++) {
+    inner += `<li> ${randNumbArr[i]} </li>`
+}
+
+$("#random_numbers").html(`<ul> ${inner} </ul>`);
+/*  ------------- /TEST ---------------- */
+
+
 // codice per generare il messaggio iniziale
 let message = `I numeri da ricordare sono ${randNumbArr.join("  ")} `;
 console.log(message);
@@ -41,8 +53,12 @@ const userInputArr = number => {
     return arr.sort((a, b) => a - b);
 }
 
+
+
+
+
 // funzione per verificare quanti numeri l'utente ha ricordato
-const checkUserInput = (randoArr, userArr) => {
+const checkUserInput = (randoArr, userArr = []) => {
 
     const numberCorrectArr = []
 
@@ -60,6 +76,7 @@ const checkUserInput = (randoArr, userArr) => {
 // codice per ritardare la richiesta dell'input dei numeri
 const delay = setTimeout(function () {
     const inputArr = userInputArr(numberToRemember);
+    $("#hide").removeClass("hide");
     const rightInput = checkUserInput(randNumbArr, inputArr);
 
     if (rightInput.length == 0) {
@@ -69,4 +86,4 @@ const delay = setTimeout(function () {
     }
 
 
-}, 4000);
+}, 1000);

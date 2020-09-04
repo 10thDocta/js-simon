@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.hide {
+  display: none;
+}
+
+#random_numbers ul {
+  display: flex;
+  border: 1px solid red;
+  height: 200px;
+  align-items: center;
+  background-color: rgb(136, 218, 221);
+}
+
+#random_numbers li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 5);
+  height: 100px;
+  border: 1px solid blue;
+  background-color: cadetblue;
+  list-style: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
