@@ -1,3 +1,5 @@
+/* global $ */
+
 $(function () {
 
     // imposto una variabile per i numeri da ricordare / creare
@@ -9,7 +11,11 @@ $(function () {
 
         while (arr.length < number) {
             const randN = Math.floor(Math.random() * 100) + 1;
-            arr.push(randN);
+
+            // se arr NON inlcude il numero generato, allora aggiungo il numero nell'array arr
+            if (!arr.includes(randN)) {
+                arr.push(randN);
+            }
         }
 
         return arr.sort((a, b) => a - b);
@@ -32,10 +38,9 @@ $(function () {
 
     // codice per generare il messaggio iniziale
     let message = `I numeri da ricordare sono ${randNumbArr.join("  ")} `;
-    // console.log(message);
-    // alert(message);
 
-    /* test */
+
+    /*  ------------- TEST ---------------- */
     const dialog = $("#dialog-message").dialog({
         modal: true
     });
@@ -43,9 +48,10 @@ $(function () {
     $("#dialog-message").html(`<p> ${message} </p>`);
 
     setTimeout(function () { dialog.dialog('close'); }, 4000);
-    /* /test */
+    /*  ------------- /TEST ---------------- */
 
-    // funzione per chiedere all'utente i numeri pari a numberToRemember
+
+    // funzione per chiedere all'utente i numeri equivalenti a numberToRemember
     const userInputArr = number => {
         const arr = [];
 
@@ -57,7 +63,11 @@ $(function () {
                 return;
             }
 
-            arr.push(input);
+            if (arr.includes(input)) {
+                alert("Numero già immesso");
+            } else {
+                arr.push(input);
+            }
         }
 
         console.log(arr.sort((a, b) => a - b));
@@ -66,16 +76,14 @@ $(function () {
 
 
 
-
-
     // funzione per verificare quanti numeri l'utente ha ricordato
-    const checkUserInput = (randoArr, userArr = []) => {
+    const checkUserInput = (randomArr, userArr = []) => {
 
         const numberCorrectArr = []
 
-        for (let i = 0; i < randoArr.length; i++) {
+        for (let i = 0; i < randomArr.length; i++) {
             // se il numero presente nel userArr è incluso nel randoArr, allora salvo questo numero nell'array numberCorrectArr
-            if (randoArr.includes(userArr[i])) {
+            if (randomArr.includes(userArr[i])) {
                 numberCorrectArr.push(userArr[i]);
             }
         }
@@ -86,8 +94,14 @@ $(function () {
 
     // codice per ritardare la richiesta dell'input dei numeri
     const delay = setTimeout(function () {
+
+        // invoco la funzione che chiede all'utente di inserire n "numberToRemember", salvando il risultato in questa variabile
         const inputArr = userInputArr(numberToRemember);
+
+        // dopo che l'utente ha inseirito i numeri, mostro nel html i numeri che erano da ricordare
         $("#hide_random").removeClass("hide");
+
+        // invoco la funzione che verifica quali numeri l'utente ha indovinato, presenti nel randNumbArr e salvo il risultato in questa variabile
         const rightInput = checkUserInput(randNumbArr, inputArr);
 
         if (rightInput.length == 0) {
@@ -96,6 +110,7 @@ $(function () {
             $("#hide_message").html(`Hai indovinato ${rightInput.length} volte, ovvero ${rightInput.join(" ")}`);
         }
 
+        // mostro il risultato del gioco nel html
         $("#hide_message").removeClass("hide");
 
     }, 5000);
